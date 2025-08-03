@@ -3,7 +3,6 @@ package net.gauntrecluse.resewn_pockets;
 import net.gauntrecluse.resewn_pockets.mixin.InventoryMixin;
 import net.gauntrecluse.resewn_pockets.mixin.ItemStackMixin;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -12,36 +11,42 @@ import net.minecraft.world.item.ItemStack;
  * the conditions applied to players picking up items. <br>
  * This class's methods are used by Mixins to add to the vanilla item logic, such that the overall logic will prevent
  * the player from getting the item if either Resewn Pockets or Vanilla checks fail.
- * @author GauntRecluse
- * @since initial development
  */
 public class SewingPatterns {
+
+    public static boolean DEBUG_ALWAYS_FALSE = false; //TODO: make sure this is set to false before any release is made.
+
+
     /**
-     * Contains the logic for whether the mod should allow a player to pick up an item on the ground or not. <br>
-     * Injects its logic in {@link Inventory#add(int, ItemStack)} via {@link InventoryMixin}.
-     * @param player The player picking up the item, can be used to get inventory and its contents
-     * @param itemStack The item possibly being picked up
-     * @return false when conditions aren't met
+     * @see InventoryMixin
+     * @return true if it should pick up normally, false if item shouldn't be picked up
      */
     public static boolean canPickUp(Player player, ItemStack itemStack) {
-        //TODO: Remove the loggers once debugging is complete
-        ResewnPockets.LOGGER.debug("canPickUp triggered with parameters {} and {}", player, itemStack);
-        ResewnPockets.LOGGER.warn("canPickUp currently always returns true");
+        ResewnPockets.LOGGER.debug("canPickUp triggered.");
+        return sharedLogic(itemStack, player);
+    }
+
+    /**
+     * @see ItemStackMixin
+     * @return true if it should ignore the item, false if item should be thrown.
+     */
+    public static boolean mayHold(ItemStack itemStack, ServerPlayer player) {
+        ResewnPockets.LOGGER.debug("mayHold triggered.");
+        return sharedLogic(itemStack, player);
+    }
+
+
+    /**
+     * This method is returned by both {@code #mayHold} and {@code #canPickUp} <br>
+     * It will always return true by default if none of the criteria cause an early return.
+     */
+    public static boolean sharedLogic(ItemStack itemStack, Player player) {
+        if(DEBUG_ALWAYS_FALSE) {
+            ResewnPockets.LOGGER.warn("DEBUG_ALWAYS_FALSE is ON!");
+            return false;
+        }
+
         return true;
     }
 
-    /**
-     * Contains the logic for whether the mod should allow a player to hold onto an item or not.
-     * @param itemStack The ItemStack that is currently being ticked by {@link Inventory#tick()}, then sent here by {@link ItemStackMixin}
-     * @param playerEntity The entity belonging to the inventory.
-     * @return false when conditions aren't met, causing the player to drop the item as if they threw it.
-     */
-    public static boolean mayHold(ItemStack itemStack, ServerPlayer playerEntity) {
-        ResewnPockets.LOGGER.debug("mayPut triggered.");
-
-        ResewnPockets.LOGGER.warn("mayPut currently always returns false");
-        return false;
-
-    }
 }
-

@@ -13,14 +13,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-@Debug(export = false)
+@Debug(export = true)
 @Mixin(value = ItemStack.class)
 public abstract class ItemStackMixin implements DataComponentHolder, FabricItemStack {
 
 
     /**
-     * This adds a check that makes the player drop an item if the logic of {@link SewingPatterns#mayHold(ItemStack, ServerPlayer)} returns false. <br>
-     * It runs with every inventory tick, and works serverside.
+     * This adds a check that makes the player drop the ticked ItemStack if the logic of {@link SewingPatterns#mayHold(ItemStack, ServerPlayer)} returns false. <br>
      */
     @Inject(
             method = "inventoryTick",
@@ -32,11 +31,16 @@ public abstract class ItemStackMixin implements DataComponentHolder, FabricItemS
     )
     private void inventoryTickInjectSew(Level level, Entity entity, int i, boolean bl, CallbackInfo ci) {
 
-        if(entity instanceof ServerPlayer){
-            if(!SewingPatterns.mayHold((ItemStack)(Object)this, (ServerPlayer)entity)) {
-            ((ServerPlayer) entity).drop((ItemStack)(Object)this, false, true);
-            ((ServerPlayer) entity).getInventory().removeItem((ItemStack)(Object)this);
-            ci.cancel();
+        if(entity instanceof ServerPlayer serverPlayerEntity){
+            ItemStack thisItemStack = (ItemStack)(Object)this;
+
+            if(!SewingPatterns.mayHold(thisItemStack, serverPlayerEntity)) {
+                serverPlayerEntity.drop(thisItemStack, false, true);
+                serverPlayerEntity.getInventory().removeItem(thisItemStack);
+
+                /* As the ItemStack is removed,
+                it may be ill-advised to not cancel the next tick call that takes the ItemStack as an argument. */
+                ci.cancel();
             }
         }
     }

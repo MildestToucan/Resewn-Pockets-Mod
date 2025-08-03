@@ -11,6 +11,7 @@ public class ResewnPockets implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Hello from Sewn Item Limiter!");
+		LOGGER.info("Initializing, give us a moment to figure out how and when to sew your players' pockets.");
+		LOGGER.warn("Resewn Pockets is still in very early development! Here be dragons!");
 	}
 }
