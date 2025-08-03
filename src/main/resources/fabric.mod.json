@@ -12,7 +12,7 @@
 	},
 	"license": "GNU LGPL v2.1",
 	"icon": "assets/resewn_pockets/resewn_pockets_lol.png",
-	"environment": "server",
+	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"net.gauntrecluse.resewn_pockets.ResewnPockets"
