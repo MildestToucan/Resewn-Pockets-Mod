@@ -4,6 +4,8 @@ package net.gauntrecluse.resewn_pockets.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.gauntrecluse.resewn_pockets.SewingPatterns;
+import net.minecraft.world.Container;
+import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,9 +18,9 @@ import org.spongepowered.asm.mixin.injection.At;
  * @author GauntRecluse
  * @since initial development
  */
-@Debug(export = false) //TODO: Switch to false then remove this comment before building.
+@Debug(export = true)
 @Mixin(value = Inventory.class)
-public abstract class InventoryMixin {
+public abstract class InventoryMixin implements Container, Nameable {
     @Shadow @Final public Player player;
 
     @WrapOperation(
