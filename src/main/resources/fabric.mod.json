@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "resewn_pockets",
-	"version": "${version}",
+	"version": "0.1.0",
 	"name": "Resewn Pockets",
 	"description": "Fabric mod that allows adding custom conditions for picking up items.",
 	"authors": [
