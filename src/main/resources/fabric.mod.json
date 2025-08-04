@@ -1,14 +1,14 @@
 {
 	"schemaVersion": 1,
-	"id": "sewn-item-limiter",
+	"id": "resewn_pockets",
 	"version": "${version}",
-	"name": "Sewn Item Limiter",
+	"name": "Resewn Pockets",
 	"description": "Fabric mod that allows adding custom conditions for picking up items.",
 	"authors": [
 		"GauntRecluse"
 	],
 	"contact": {
-		"sources": "https://github.com/MildestToucan/Sewn-Item-Limiter"
+		"sources": "https://github.com/MildestToucan/Resewn-Pockets-Mod"
 	},
 	"license": "GNU LGPL v2.1",
 	"icon": "assets/resewn_pockets/resewn_pockets_lol.png",
@@ -25,7 +25,8 @@
 		"fabricloader": ">=0.16.4",
 		"minecraft": "~1.21.1",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"fzzy_config": ">=0.7.1+1.21"
 	},
 	"suggests": {
 		"another-mod": "*"

@@ -1,10 +1,13 @@
 package net.gauntrecluse.resewn_pockets;
 
+import net.gauntrecluse.resewn_pockets.config.Configs;
 import net.gauntrecluse.resewn_pockets.mixin.InventoryMixin;
 import net.gauntrecluse.resewn_pockets.mixin.ItemStackMixin;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.Map;
 
 /**
  * Class that uses the mod's config and freely encourages external mods' mixins to modify
@@ -15,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 public class SewingPatterns {
 
     public static boolean DEBUG_ALWAYS_FALSE = false; //TODO: make sure this is set to false before any release is made.
+    public static boolean DEBUG_ALWAYS_TRUE = false;
 
 
     /**
@@ -46,7 +50,22 @@ public class SewingPatterns {
             return false;
         }
 
+        if(DEBUG_ALWAYS_TRUE) {
+            ResewnPockets.LOGGER.warn("DEBUG_ALWAYS_TRUE is ON!");
+            return true;
+        }
+
+
+        ResewnPockets.LOGGER.warn("CHECKING: {}", itemStack.getItem());
+        if(itemByCount.isEmpty()) {
+            ResewnPockets.LOGGER.warn("itemByCount is empty!");
+        } else if(itemByCount.containsKey(itemStack.getItem().toString())){
+            return player.getInventory().countItem(itemStack.getItem()) <= itemByCount.get(itemStack.getItem().toString());
+        }
+
         return true;
     }
+
+    public static Map<String, ? extends Integer> itemByCount = Configs.CONFIG.itemByCount.get();
 
 }
