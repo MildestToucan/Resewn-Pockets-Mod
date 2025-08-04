@@ -16,7 +16,8 @@ Licenses:
 **SpongePowered Mixin**: https://github.com/SpongePowered/Mixin/blob/master/LICENSE.txt (MIT as of 01/08/2025 (August))  
 **MixinExtras**: https://github.com/LlamaLad7/MixinExtras/blob/master/LICENSE (MIT as of 01/08/2025 (August))
 
-
+### [FzzyConfig]:  
+License: https://github.com/fzzyhmstrs/fconfig/blob/1.21/LICENSE (Custom as of 04/08/2025 (August))
 
 ## SPECIAL THANKS:  
 My mother - being an absolute Saint  
