@@ -7,16 +7,19 @@ This is where external libraries and tools' licenses and credits will be put, al
 
 
 ### [Fabric API, Fabric Loader]:  
+Role in development: Providing a modding platform and API
 License: https://github.com/FabricMC/fabric/blob/1.21.1/LICENSE (Apache License 2.0 as of 01/08/2025 (August))  
 Fabric website: https://fabricmc.net/  
 
 
 ### [SpongePowered Mixin, MixinExtras]:  
+Role in development: Providing tools to modify source code
 Licenses:  
 **SpongePowered Mixin**: https://github.com/SpongePowered/Mixin/blob/master/LICENSE.txt (MIT as of 01/08/2025 (August))  
 **MixinExtras**: https://github.com/LlamaLad7/MixinExtras/blob/master/LICENSE (MIT as of 01/08/2025 (August))
 
 ### [FzzyConfig]:  
+Role in development: Providing a configuration library
 License: https://github.com/fzzyhmstrs/fconfig/blob/1.21/LICENSE (Custom as of 04/08/2025 (August))
 
 ## SPECIAL THANKS:  
