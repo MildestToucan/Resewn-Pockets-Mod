@@ -3,8 +3,10 @@
   "package": "net.gauntrecluse.resewn_pockets.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractContainerMenuMixin",
     "InventoryMixin",
-    "ItemStackMixin"
+    "ResewnItemStackMixin",
+    "SlotMixin"
   ],
   "injectors": {
     "defaultRequire": 1

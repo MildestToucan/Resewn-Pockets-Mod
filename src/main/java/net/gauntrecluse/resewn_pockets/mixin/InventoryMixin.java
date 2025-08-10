@@ -4,6 +4,7 @@ package net.gauntrecluse.resewn_pockets.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.gauntrecluse.resewn_pockets.SewingPatterns;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Inventory;
@@ -27,7 +28,10 @@ public abstract class InventoryMixin implements Container, Nameable {
             method = "add(ILnet/minecraft/world/item/ItemStack;)Z",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z", ordinal = 0))
     private boolean inventoryAddSew(ItemStack itemStack, Operation<Boolean> original) {
-        return original.call(itemStack) || !SewingPatterns.canPickUp(this.player, itemStack);
+        if(player instanceof ServerPlayer serverPlayer) {
+            return original.call(itemStack) || !SewingPatterns.canPickUp(serverPlayer, itemStack);
+        }
+        return original.call(itemStack);
     }
 }
 

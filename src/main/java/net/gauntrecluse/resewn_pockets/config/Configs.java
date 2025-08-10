@@ -7,8 +7,6 @@ public class Configs {
 
     public static ResewnConfig CONFIG = ConfigApiJava.registerAndLoadConfig(ResewnConfig::new, RegisterType.SERVER);
 
-    public static void init() {
-
-    }
+    public static void init() {}
 
 }

@@ -14,13 +14,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Debug(export = true)
-@Mixin(value = ItemStack.class)
-public abstract class ItemStackMixin implements DataComponentHolder, FabricItemStack {
+@Mixin(value = ItemStack.class) //Renamed mixin file to prevent confusion with Fabric mixins of the same name.
+public abstract class ResewnItemStackMixin implements DataComponentHolder, FabricItemStack {
 
 
-    /**
-     * This adds a check that makes the player drop the ticked ItemStack if the logic of {@link SewingPatterns#mayHold(ItemStack, ServerPlayer)} returns false. <br>
-     */
     @Inject(
             method = "inventoryTick",
             at = @At(
@@ -33,9 +30,9 @@ public abstract class ItemStackMixin implements DataComponentHolder, FabricItemS
 
         if(entity instanceof ServerPlayer serverPlayerEntity){
             ItemStack thisItemStack = (ItemStack)(Object)this;
-
             if(!SewingPatterns.mayHold(thisItemStack, serverPlayerEntity)) {
-                serverPlayerEntity.drop(thisItemStack, false, true);
+                //TODO: Make this drop an item amount that is relative to excess rather than the whole stack.
+                serverPlayerEntity.drop(thisItemStack, false, false);
                 serverPlayerEntity.getInventory().removeItem(thisItemStack);
 
                 /* As the ItemStack is removed,
