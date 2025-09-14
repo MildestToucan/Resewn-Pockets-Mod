@@ -34,15 +34,15 @@ If you believe it to be a conflict that I could fix, or you want my opinion on i
 make one with the conflicting mod.
 
 ### Installation and setup:  
-This mod will not do anything on its own. You must first launch the server/client with it in your mods folder for it to generate its config file.  
-The guide to configuring the mod for the supported config logic can be found in the Wiki(WIP).  
+This mod will not do anything on its own (other than add checks that'll nibble on your performance), Resewn Pockets uses 
+FzzyConfig for its configuration, meaning the settings are global across all your worlds. No per-world overrides are being worked on, 
+but it is not entirely out of the picture.  
+Editing the config is done via the TOML file generated through FzzyConfig directly, Resewn Pockets is a server-sided mod so it does not make use of FzzyConfig's GUI configuration.  
+The guide to configuring the mod for the supported config logic can be found in the Wiki(To be released when the mod gets to a releaseable state).  
 
 ### If the config isn't enough:  
-This mod has intended support for other mods modifying its contents to add their own logic.  
-You should target the SewingPatterns class; as Mixins are applied as the game loads, it should be able
-
-From there, assuming no conflicts with another mod's mixins, issues are the results of bugs or me messing up, or from the external dev making their Mixin wrong.  
-If in doubt about the source of the issue when trying to use mixins to modify this mod, open a GitHub issue.  
+Resewn Pockets intends to not close itself off from another mod's Mixins being used to change its logic or inject its own.  
+As such you may, at your own risk, use Mixins to further manually customize logic to tailor your needs.
 
 ### If the config and mixins aren't enough:  
 This mod's release is to be licensed under the LGPL v2.1 license, as such you are free to make your own fork of it as long as you properly credit this mod, and also license it under the LGPL license.  
