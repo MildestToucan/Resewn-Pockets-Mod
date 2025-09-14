@@ -3,7 +3,7 @@ package net.gauntrecluse.resewn_pockets.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import net.gauntrecluse.resewn_pockets.ResewnPockets;
+import net.gauntrecluse.resewn_pockets.ModOperations;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,15 +24,13 @@ public abstract class SlotMixin {
     public Container container;
 
 
-    @WrapMethod(method = "mayPlace") //TODO: test this within a dedicated server environment
+    @WrapMethod(method = "mayPlace")
     private boolean resewnMayPlaceWrap(ItemStack itemStack, Operation<Boolean> original) {
-        if(this.container instanceof Inventory inventory) {
-            if(inventory.player instanceof ServerPlayer serverPlayer) {
-                return serverPlayer.isCreative();
-            }
+        if(container instanceof Inventory inventory && inventory.player instanceof ServerPlayer serverPlayer) {
+            return ModOperations.shouldHave(serverPlayer, itemStack);
         }
+
         return original.call(itemStack);
     }
-
 
 }
